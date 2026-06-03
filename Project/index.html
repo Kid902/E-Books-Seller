@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageTurn Pro | Secure E-Book Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="header-top">
+            <div class="logo"><h1>PageTurn.</h1></div>
+            <div class="wallet">
+                <span>Balance:</span>
+                <span id="balDisplay">$750.00</span>
+            </div>
+        </div>
+        <div class="nav-bar">
+            <div class="filter-scroll">
+                <div class="filter-tabs" id="tabs"></div>
+            </div>
+            <button class="btn-sell" onclick="openModal('sellModal')">List E-Book</button>
+        </div>
+    </header>
+
+    <main class="grid" id="grid"></main>
+</div>
+
+<div class="modal" id="buyModal">
+    <div class="m-content">
+        <button class="close" onclick="closeAll()">&times;</button>
+        <div id="buyData"></div>
+    </div>
+</div>
+
+<div class="modal" id="sellModal">
+    <div class="m-content">
+        <button class="close" onclick="closeAll()">&times;</button>
+        <h2 style="margin-top:0">Sell Your Book</h2>
+        <form id="sellForm" onsubmit="handleSell(event)">
+            <div class="form-g">
+                <label>Book Cover</label>
+                <div style="display:flex; gap:10px; margin-bottom:10px;">
+                    <button type="button" class="tab" onclick="startCam()">📸 Camera</button>
+                    <button type="button" class="tab" onclick="document.getElementById('fInput').click()">📁 Media</button>
+                </div>
+                <video id="video" autoplay playsinline></video>
+                <img id="preview">
+                <input type="file" id="fInput" hidden accept="image/*" onchange="loadFile(this)">
+                <button type="button" id="snap" class="btn-buy" style="display:none; background:var(--secondary)" onclick="takeSnap()">Capture Photo</button>
+            </div>
+            <div class="form-g"><label>Title</label><input type="text" id="t" required></div>
+            <div class="form-g"><label>Author</label><input type="text" id="a" required></div>
+            <div class="form-g">
+                <label>Category</label>
+                <select id="c">
+                    <option value="fiction">Fiction</option>
+                    <option value="tech">Tech</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="manga">Manga</option>
+                    <option value="history">History</option>
+                    <option value="horror">Horror</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                    <option value="self-help">Self-Help</option>
+                </select>
+            </div>
+            <div class="form-g"><label>Price ($)</label><input type="number" id="p" step="0.01" required></div>
+            <div class="form-g"><label>Summary</label><textarea id="s" rows="3" required></textarea></div>
+            <button type="submit" class="btn-buy">Post to Marketplace</button>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
